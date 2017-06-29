@@ -1,5 +1,5 @@
-require 'device'
-require 'hub'
+require 'iot_hub/device'
+require 'iot_hub/hub'
 
 describe Hub do
   device1 = Device.new

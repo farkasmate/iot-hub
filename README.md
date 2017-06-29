@@ -1,6 +1,6 @@
-# iot-hub
+# iot_hub
 
 [wiki][]
 
-[wiki]: https://github.com/farkasmate/iot-hub/wiki
+[wiki]: https://github.com/farkasmate/iot_hub/wiki
 

@@ -1,4 +1,4 @@
-require 'device'
+require 'iot_hub/device'
 
 class Hub
   attr_reader :devices

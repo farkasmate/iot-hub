@@ -24,7 +24,7 @@ describe Hub do
     end
 
     context 'given the same device twice' do
-      it 'raise ArgumentError' do
+      it 'raises ArgumentError' do
         hub = Hub.new
         hub.register(device1)
         expect { hub.register(device1) }.to raise_error(ArgumentError)
@@ -32,9 +32,37 @@ describe Hub do
     end
 
     context 'given nil' do
-      it 'raise ArgumentError' do
+      it 'raises ArgumentError' do
         hub = Hub.new
         expect { hub.register(nil) }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe '#deregister' do
+    context 'given a registered device' do
+      it 'deregisters the device' do
+        hub = Hub.new
+        hub.register(device1)
+        hub.register(device2)
+        hub.deregister(device1)
+        expect(hub.devices.size).to eq(1)
+        expect(hub.devices[0]).to eq(device2)
+      end
+    end
+
+    context 'given an unknown device' do
+      it 'raises ArgumentError' do
+        hub = Hub.new
+        hub.register(device1)
+        expect { hub.deregister(device2) }.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'given nil' do
+      it 'raises ArgumentError' do
+        hub = Hub.new
+        expect { hub.deregister(device1) }.to raise_error(ArgumentError)
       end
     end
   end

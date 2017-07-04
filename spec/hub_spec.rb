@@ -2,8 +2,8 @@ require 'iot_hub/device'
 require 'iot_hub/hub'
 
 describe Hub do
-  device1 = Device.new
-  device2 = Device.new
+  device1 = Device.new(1)
+  device2 = Device.new(2)
 
   describe '#register' do
     context 'given a valid device' do

@@ -66,5 +66,17 @@ describe Hub do
       end
     end
   end
+
+  describe '#connect' do
+    context 'given two registered devices with valid event and action' do
+      it 'creates a new rule' do
+        hub = Hub.new
+        hub.register(device1)
+        hub.register(device2)
+        hub.connect(device1, :DUMMY_EVENT, device2, :DUMMY_ACTION)
+        expect(hub.rules.size).to eq(1)
+      end
+    end
+  end
 end
 

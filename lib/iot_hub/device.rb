@@ -8,5 +8,13 @@ class Device
   def self.default_name
     'Generic Device'
   end
+
+  def self.events
+    [ :DUMMY_EVENT ]
+  end
+
+  def self.actions
+    [ :DUMMY_ACTION ]
+  end
 end
 

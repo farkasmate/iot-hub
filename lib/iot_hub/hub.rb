@@ -8,8 +8,8 @@ class Hub
   end
 
   def register(device)
-    raise 'Not a Device' unless device.is_a? Device
-    raise 'Already registered' if @devices.values.include? device # FIXME: Check ID
+    raise ArgumentError.new('Object needs to be a Device to register.') unless device.is_a? Device
+    raise ArgumentError.new('Device is already registered') if @devices.values.include? device # FIXME: Check ID
 
     index = @devices.values.count { |registered_device| registered_device.is_a? device.class }
     @devices["#{device.class.default_name} #{index}"] = device

@@ -24,17 +24,17 @@ describe Hub do
     end
 
     context 'given the same device twice' do
-      it 'raise an exception' do
+      it 'raise ArgumentError' do
         hub = Hub.new
         hub.register(device1)
-        expect { hub.register(device1) }.to raise_error('Already registered')
+        expect { hub.register(device1) }.to raise_error(ArgumentError)
       end
     end
 
     context 'given nil' do
-      it 'raise an exception' do
+      it 'raise ArgumentError' do
         hub = Hub.new
-        expect { hub.register(nil) }.to raise_error('Not a Device')
+        expect { hub.register(nil) }.to raise_error(ArgumentError)
       end
     end
   end

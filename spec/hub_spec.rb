@@ -74,7 +74,7 @@ describe Hub do
         hub.register(device1)
         hub.register(device2)
         hub.connect(device1, :DUMMY_EVENT, device2, :DUMMY_ACTION)
-        expect(hub.rules.size).to eq(1)
+        expect(hub.rules[device1.id][:DUMMY_EVENT][device2.id].first).to eq(:DUMMY_ACTION)
       end
     end
   end

@@ -1,5 +1,4 @@
 require 'iot_hub/device'
-require 'iot_hub/rule'
 
 class Hub
   attr_reader :devices, :rules
@@ -28,11 +27,13 @@ class Hub
     raise ArgumentError.new('Origin device is not registered yet') unless @devices.collect{ |device| device.id }.include? origin.id
     raise ArgumentError.new('Target device is not registered yet') unless @devices.collect{ |device| device.id }.include? target.id
 
-    rule = Rule.new(origin, event, target, action)
-    @rules.each { |rule|
-      raise ArgumentError.new('Rule is already present') if rule.origin == origin and rule.event == event and rule.taget == target and rule.action == action
-    }
-    @rules.push(rule)
+    @rules[origin.id] ||= {}
+    @rules[origin.id][event] ||= {}
+    @rules[origin.id][event][target.id] ||= []
+
+    raise ArgumentError.new('Rule is already present') if @rules[origin.id][event][target.id].include? action
+
+    @rules[origin.id][event][target.id].push(action)
   end
 end
 

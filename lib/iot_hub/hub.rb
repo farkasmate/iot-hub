@@ -5,7 +5,7 @@ class Hub
 
   def initialize
     @devices = []
-    @rules = []
+    @rules = {}
   end
 
   def register(device)
@@ -34,6 +34,18 @@ class Hub
     raise ArgumentError.new('Rule is already present') if @rules[origin.id][event][target.id].include? action
 
     @rules[origin.id][event][target.id].push(action)
+  end
+
+  def event(origin, event)
+    @rules[origin.id][event].each { |target, actions|
+      actions.each { |action|
+        device_by_id(target).action(action)
+      }
+    }
+  end
+
+  def device_by_id(id)
+    @devices.select { |device| device.id == id }.first
   end
 end
 

@@ -78,5 +78,18 @@ describe Hub do
       end
     end
   end
+
+  describe '#event' do
+    context 'given a registered devices with valid event and connected actions' do
+      it 'fires the actions' do
+        hub = Hub.new
+        hub.register(device1)
+        hub.register(device2)
+        hub.connect(device1, :DUMMY_EVENT, device2, :DUMMY_ACTION)
+        expect(device2).to receive(:action).with(:DUMMY_ACTION)
+        hub.event(device1, :DUMMY_EVENT)
+      end
+    end
+  end
 end
 

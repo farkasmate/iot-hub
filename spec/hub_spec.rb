@@ -1,5 +1,6 @@
 require 'iot_hub/device'
 require 'iot_hub/hub'
+require 'pry'
 
 describe Hub do
   device1 = Device.new(1)
